@@ -17,12 +17,27 @@ async function run() {
         const serviceCollection = client.db('oralOptimal').collection('services');
 
 
+        app.get('/servicesHome', async (req, res) => {
+            const query = {};
+            const cursor = serviceCollection.find(query).limit(3);
+            const services = await cursor.toArray();
+            res.send(services);
+        })
+
         app.get('/services', async (req, res) => {
             const query = {};
             const cursor = serviceCollection.find(query);
             const services = await cursor.toArray();
             res.send(services);
         })
+
+        app.get('/serviceDetail/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const service = await serviceCollection.findOne(query);
+            res.send(service);
+        })
+
 
 
 
