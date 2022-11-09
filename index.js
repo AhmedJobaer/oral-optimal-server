@@ -15,6 +15,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 async function run() {
     try {
         const serviceCollection = client.db('oralOptimal').collection('services');
+        const reviewCollection = client.db('oralOptimal').collection('serviceReview');
 
 
         app.get('/servicesHome', async (req, res) => {
@@ -38,8 +39,19 @@ async function run() {
             res.send(service);
         })
 
+        //add service
+
+        app.post("/addServices", async (req, res) => {
+            const newService = req.body;
+            const result = await serviceCollection.insertOne(newService);
+            console.log(result);
+            res.send(result);
+        })
 
 
+
+
+        //app.get('')
 
         /*  const user = {
              name: 'test',
