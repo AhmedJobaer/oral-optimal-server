@@ -59,6 +59,23 @@ async function run() {
 
 
 
+        app.get('/serviceReview', async (req, res) => {
+            let query = {};
+            if (req.query.serviceId) {
+                query = {
+                    serviceId: req.query.serviceId
+                }
+            }
+            const cursor = reviewCollection.find(query);
+            const review = await cursor.toArray();
+            res.send(review);
+        })
+
+
+
+
+
+
         //app.get('')
 
         /*  const user = {
