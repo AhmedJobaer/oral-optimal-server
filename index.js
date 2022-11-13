@@ -11,7 +11,9 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 //ITaLFQbTTgf4i1a9
-const uri = "mongodb+srv://DB_USER:DB_PASSWORD@cluster0.r2o8evu.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.r2o8evu.mongodb.net/?retryWrites=true&w=majority`;
+
+//console.log(uri);
 
 //const uri = "mongodb://localhost:27017";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
